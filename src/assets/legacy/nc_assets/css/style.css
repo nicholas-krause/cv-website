@@ -1,0 +1,563 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Jul 7, 2020, 9:07:23 PM
+    Author     : OEM
+padding: top right bottom left
+
+*/
+body{
+    background-color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    font-family: oswald-medium, oswald, sans-serif;
+    font-size: 24px;
+    font-variant: small-caps;
+    font-weight: 300;
+}
+
+h2 {
+    color: orange;
+}
+
+h3 {
+    font-family: oswald-medium, oswald, sans-serif;
+    font-variant: small-caps;
+    font-weight: 300;
+}
+
+h4{
+    color: orange;
+}
+
+h5 {
+    font-size: 24px;
+    color: white;
+    height: 24px;
+    margin: 0px;
+    font-family: oswald-medium, oswald, sans-serif;
+    font-variant: small-caps;
+    font-weight: 300;
+}
+
+.selected{
+    font-weight: bold;
+    color:orange;
+}
+
+a {
+    text-decoration: none;
+    color: orangered;
+}
+
+li {
+    text-align: -webkit-match-parent;
+    padding: 5px;
+}
+ .box {
+    width: 1100px;
+    display: table;
+}
+.box .box-row {
+    display: table-row;
+}
+.box .box-cell {
+    display: table-cell;
+    padding: 10px;
+}
+.box .box-cell.box1 {
+    color: white;
+    width: 25%;
+}
+.box .box-cell.box2 {
+    text-align: justify;
+    width: 37.5%;
+}
+.box .box-cell.box3 {
+    text-align: justify;
+    width: 37.5%;
+}
+
+.image-cropper {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    left: 137px;/* quarter 550?*/
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #383838;
+
+}
+
+#container {
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#header {
+    text-align: left;
+    background-color: #1A1A1A;
+    color: white;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#head_box {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: oswald-medium,sans-serif;
+
+}
+
+#name {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#nav {
+    background-color: #1A1A1A;
+    width: 1100px;
+}
+#nav .box {
+    width: 400px;
+}
+#nav .box .box-cell {
+    font-size: 14px;
+    font-family: Karla, sans-serif;
+
+}
+#nav .box .box-cell.box1 {
+    padding: 20px;
+    width: auto;
+    color: orange;
+    text-align: center;
+    border-right: 1px solid grey;
+}
+#nav .box .box-cell.box2 {
+    padding: 20px;
+    width: auto;
+    text-align: center;
+    border-right: 1px solid grey;
+}
+#nav .box .box-cell.box3 {
+    padding: 20px;
+    width: auto;
+    text-align: center;
+}
+
+#main {
+    background-color: #383838;
+}
+
+#content {
+
+    padding: 30px 10px 10px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1100px;
+    height: 270px; /* this is changeable */
+    background-color: #383838;
+
+}
+
+#picture_space {
+    float: left;
+    margin: 0 auto;
+    width: 40%;
+    height: 100%;
+    text-align: center;
+}
+
+#image {
+    background-color: #383838;
+
+}
+
+#description{
+    padding-left: 10px;
+    color:white;
+    background-color: #383838;
+    width: 58.5%;
+    float: right;
+    height: 100%;
+    border-left: 3px solid orange;
+
+}
+
+#sec_description {
+    padding: 10px 10px 10px 10px;
+    background-color: #383838;
+    color: white;
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1100px;
+
+}
+
+#footer {
+    padding: 10px;
+    clear: both;
+    background-color: black;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#footer .box .box-cell.box1 {
+    width: 100px;
+}
+
+#copyright {
+    width: 1100px;
+    color: #cecfd1;
+    border-top: 1px solid #cecfd1;
+}
+
+
+/* projects page extra styles */
+
+.box2 {
+    width: 1100px;
+    display: table;
+}
+
+.box2 .box-row {
+    display: table-row;
+}
+.box2 .box-cell {
+    display: table-cell;
+    color: white;
+    padding: 10px;
+}
+.box2 .box-cell.box1 {
+    text-align: justify;
+    color: white;
+    width: 33%;
+}
+.box2 .box-cell.box2 {
+    text-align: justify;
+    color: white;
+    width: 33%;
+}
+.box2 .box-cell.box3 {
+    text-align: justify;
+    color: white;
+    width: 33%;
+}
+
+#proj_container {
+    background-color: #383838;
+}
+
+#proj_main {
+
+    padding: 30px 10px 10px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1100px;
+    min-height: 270px; /* this is changeable */
+    background-color: #383838;
+
+}
+
+.expanded {
+   max-height: 2000px;
+   visibility: visible;
+   opacity: 1;
+
+}
+
+#rc_heli_emulater_expand_container .expanded {
+   max-height: 2000px; /*need to adjust on a case by case basis */
+   visibility: visible;
+   opacity: 1;
+
+}
+
+
+.collapsed {
+   max-height: 0;
+   opacity: 0;
+   visibility: hidden;
+}
+
+.expand-arrow {
+
+}
+
+/* could be an avenue */
+
+#ur5_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+
+#ur5_main {
+    padding-right: 20px;
+
+
+}
+
+#rc_heli_PID_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+}
+
+#rc_heli_PID_main {
+    padding-right: 20px;
+
+
+}
+
+#rc_heli_emulater_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#rc_heli_emulater_main {
+    padding-right: 20px;
+
+
+}
+
+#auto_dartboard_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#auto_dartboard_main {
+    padding-right: 20px;
+
+
+}
+
+#wacky_racer_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#wacky_racer_main {
+    padding-right: 20px;
+
+
+}
+
+#poisson_optimization_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#poisson_optimization_main {
+    padding-right: 20px;
+
+
+}
+
+#turtle_bot_pf_kde_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#turtle_bot_pf_kde_main {
+    padding-right: 20px;
+
+
+}
+
+#edge_detection_wt_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#edge_detection_wt_main {
+    padding-right: 20px;
+
+
+}
+
+#fpga_timer_pwm_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#fpga_timer_pwm_main {
+    padding-right: 20px;
+
+
+}
+
+#website_expand_container {
+  overflow: hidden;
+  transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+
+}
+
+#website_main {
+    padding-right: 20px;
+
+
+}
+
+/* skills_exp page extra styles */
+.box4 {
+    width: 1100px;
+    display: table;
+}
+
+.box4 .box-row {
+    display: table-row;
+}
+.box4 .box-cell {
+    display: table-cell;
+    color: white;
+    padding: 10px;
+}
+.box4 .box-cell.box1 {
+    text-align: justify;
+
+    width: 33%;
+}
+.box4 .box-cell.box2 {
+    text-align: justify;
+    width: 33%;
+}
+.box4 .box-cell.box3 {
+    text-align: justify;
+    width: 33%;
+}
+
+.tex sub, .latex sub, .latex sup {
+    text-transform: uppercase;
+}
+
+.tex sub, .latex sub {
+    vertical-align: -0.5ex;
+    margin-left: -0.1667em;
+    margin-right: -0.125em;
+}
+
+.tex, .latex, .tex sub, .latex sub {
+    font-size: 1em;
+}
+
+.latex sup {
+    font-size: 0.85em;
+    vertical-align: 0.15em;
+    margin-left: -0.36em;
+    margin-right: -0.15em;
+}
+
+#skill_exp_container {
+    background-color: #383838;
+
+    max-height: 2000px;
+
+
+}
+
+#skill_exp_content_main {
+    padding: 30px 10px 10px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1100px;
+    min-height: 270px; /* this is changeable */
+    max-height: 2000px;
+    background-color: #383838;
+}
+
+
+#skills_expand_container {
+    overflow: hidden;
+    transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+}
+
+#ur5_desc {
+    float: right;
+}
+#skills_expand_container .expanded {
+   max-height: 500px; /*need to adjust on a case by case basis */
+   visibility: visible;
+   opacity: 1;
+
+}
+
+
+#prog_expand_container {
+    overflow: hidden;
+    transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#attri_expand_container {
+    overflow: hidden;
+    transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+}
+
+#hob_int_expand_container {
+    overflow: hidden;
+    transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+}
+
+#exp_expand_container {
+    overflow: hidden;
+    transition:max-height 0.6s, visibility 0s, opacity 0.5s linear;
+}
+
+#ur5_desc {
+    border-left: 3px solid orange;
+}
+
+#rc_heli_PID_desc {
+    border-left: 3px solid orange;
+}
+
+#rc_heli_emulater_desc {
+    border-left: 3px solid orange;
+}
+
+#auto_dartboard_desc {
+    border-left: 3px solid orange;
+}
+
+#wacky_racer_desc {
+    border-left: 3px solid orange;
+}
+
+#poisson_optimization_desc {
+    border-left: 3px solid orange;
+
+}
+
+#turtle_bot_pf_kde_desc {
+    border-left: 3px solid orange;
+}
+
+#edge_detection_wt_desc {
+    border-left: 3px solid orange;
+}
+
+#fpga_timer_pwm_desc {
+    border-left: 3px solid orange;
+}
+
+#website_desc {
+    border-left: 3px solid orange;
+}

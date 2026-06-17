@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Skills & Experience</title>
+        <link rel="stylesheet" type="text/css" href="nc_assets/css/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript">
+            function expandContract(id1, id2) {
+               const el = document.getElementById(id1);
+               attribute = document.getElementById(id2).getAttribute("aria-expanded");
+
+                if (typeof last_el !== 'undefined'){
+                    if (last_el !== el) {
+                        last_attri = document.getElementById(last_id2).getAttribute("aria-expanded")
+                        if (last_attri === 'true'){
+                            last_el.setAttribute("class", "collapsed");
+                            document.getElementById(last_id2).setAttribute("aria-expanded", "false");
+
+                            if (attribute === 'true'){
+                                el.setAttribute("class", "collapsed");
+                                document.getElementById(id2).setAttribute("aria-expanded", "false");
+                            } else
+                            {
+                                el.setAttribute("class", "expanded");
+                                document.getElementById(id2).setAttribute("aria-expanded", "true");
+                            }
+                        } else
+                        {
+                            //last_el.setAttribute("class", "expanded");
+                            //document.getElementById(last_id2).setAttribute("aria-expanded", "true");
+
+                            if (attribute === 'true'){
+                                el.setAttribute("class", "collapsed");
+                                document.getElementById(id2).setAttribute("aria-expanded", "false");
+                            } else
+                            {
+                                el.setAttribute("class", "expanded");
+                                document.getElementById(id2).setAttribute("aria-expanded", "true");
+                            }
+
+                        }
+                    } else {
+                       if (attribute === 'true'){
+                            el.setAttribute("class", "collapsed");
+                            document.getElementById(id2).setAttribute("aria-expanded", "false");
+                       } else
+                       {
+                            el.setAttribute("class", "expanded");
+                            document.getElementById(id2).setAttribute("aria-expanded", "true");
+                       }
+
+                        last_el = el;
+                        last_id2 = id2;
+
+                    }
+
+                }   else {
+
+                    if (attribute === 'true'){
+                        el.setAttribute("class", "collapsed");
+                        document.getElementById(id2).setAttribute("aria-expanded", "false");
+                    } else
+                    {
+                        el.setAttribute("class", "expanded");
+                        document.getElementById(id2).setAttribute("aria-expanded", "true");
+                    }
+
+
+                }
+
+
+                last_el = el;
+                last_id2 = id2;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <div role="banner" id="header">
+                <div class="box" id="head_box">
+                    <div class="box-row" id="name">
+                        <h1>Nicholas Krause</h1>
+                    </div>
+
+                    <div class="box-row" id="nav">
+                        <div class="box" id="nav_box">
+                            <div class="box-row">
+                                <div class="box-cell box1" id="home">
+                                    <a href="index.html">HOME</a>
+
+                                </div>
+                                <div class="box-cell box2" id="projects">
+                                    <a class="" href="projects.html">PROJECTS</a>
+                                </div>
+
+                                <div class="box-cell box3" id="experience">
+                                    <a class="selected" href="skills_experience.html">SKILLS & EXPERIENCE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="skill_exp_container">
+                <div id="skill_exp_content_main">
+                    <div id="skill_pg_head">
+                        <h2> Skills & Experience</h2>
+
+                    </div>
+                    <div id="skills_container">
+
+                        <div class="box4" id="skills_main">
+                            <div class="box-row">
+                                <div id="skills_head">
+                                    <h5 style="padding-left:10px">Skills<a style="color:white" aria-expanded="false" id="TLink1" href="#!" onclick="expandContract('skills_expand_container', 'TLink1')"> <img class="expand-arrow" style="vertical-align: sub" src="nc_assets/img/icons/icons8-expand-arrow-24.png" alt=""></a></h5>
+                                </div>
+                            </div>
+
+                            <div class="collapsed" id="skills_expand_container">
+                                <div class="box-row">
+                                    <div class="box-cell" id="skills_list_1">
+                                        <ul>
+                                            <li>Embedded programming (w/CCS)</li>
+                                            <li>PCB development and design (w/Altium)</li>
+                                            <li>Digital signal processing</li>
+                                            <li>Computer Vision (w/OpenCV)</li>
+                                            <li>Arduino programming</li>
+                                            <li>Maintaining and creating version control (w/Git repositories)</li>
+
+                                        </ul>
+
+                                    </div>
+                                    <div class="box-cell" id="skills_list_2">
+                                        <ul>
+                                            <li>Wireless and IoT networking (w/Zigbee protocol</li>
+                                            <li>Emulator realisation (w/Simulink)</li>
+                                            <li>Android development (w/Android Studio)</li>
+                                            <li>Poster and magazine editing and development(w/Adobe Illustrator)</li>
+                                            <li>Mathematical analysis (w/Matlab, Python)</li>
+                                            <li>Control system design</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- for some reason it has to be like this, and not like every other section-->
+                    <div class="box4" id="program_container">
+                        <div style="padding:0px 10px 20px 10px;" id="prog_head">
+                            <h5 style="padding-bottom: 20px">Programming Languages (Proficiency)<a style="color:white" aria-expanded="false" id="TLink2" href="#!" onclick="expandContract('prog_expand_container', 'TLink2')"> <img class="expand-arrow" style="vertical-align: sub" src="nc_assets/img/icons/icons8-expand-arrow-24.png" alt=""></a></h5>
+                        </div>
+                        <div class="collapsed" id="prog_expand_container">
+                            <div class="box4" id="prog_main">
+                                <div class="box-row">
+                                    <div style="width:100%" class="box-cell">
+                                        <img style="margin-left: auto; margin-right:auto; text-align: center; padding-left:140px; padding-bottom:10px" src="nc_assets/img/featured/svg_website_skills-01.svg" alt="programming_skills" height="250" width="800"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="box4" id="experience_container">
+                        <div class="box-row" id="experience_head">
+                            <h5 style="padding-left:10px">Experience<a style="color:white" aria-expanded="false" id="TLink3" href="#!" onclick="expandContract('exp_expand_container', 'TLink3')"> <img class="expand-arrow" style="vertical-align: sub" src="nc_assets/img/icons/icons8-expand-arrow-24.png" alt=""></a></h5>
+                        </div>
+
+                        <div class="collapsed" id="exp_expand_container">
+                            <div class="box-row" id="experience_main">
+
+                                <div class="box-cell" id="experience_list_1">
+                                    <ul>
+                                        <li>
+                                            Managing Experience (2 years Approx.) - I was an RA for a year during my study, capable of responsible supervision for around 20 individuals.
+                                            I was also the Marketing Manager for a volunteering robotics club on campus (UC Robotics [could link it here]), responsible for social media posts and
+                                            merchandise design and manufacture.
+                                        </li>
+
+                                        <li>
+                                            Python Programming (3 years Approx.) - I have completed a multitude of projects that incorporated or were entirely made possible through Python (2 and 3)
+                                            programming. Some of the more recent and/or interesting projects can be found in the projects page on this site.
+                                        </li>
+
+                                        <li>
+                                            C/C++ Programming (2 years Approx.) - Similar to Python, I have also had a fair bit of experience programming a variety of projects and tasks through the
+                                            use of C and the more object orientated C++. Several of these projects can be found on the projects page.
+
+                                        </li>
+                                        <li>
+                                            Web development - The only real experience I have from a profession stand point is some basic back end development in C#, my main experience I have derived
+                                            has been from making this very website. Everything on this website was created or designed by me using HTML5, CSS3, and a bit of Javascript.
+                                        </li>
+
+                                        <li>
+                                            Object Orientated programming - As well as C++, I have has some experience with Java and a small amount of C# developing an Android App to detect and track
+                                            Bluetooth LE beacons. This experience and knowledge I have found to be very useful and transferable to learning new OOP languages.
+                                        </li>
+
+
+                                        <li>
+                                            Electrical Circuit and PCB Design (Approx 2 years) - A cornerstone of Mechatronics design and builds are using Printed Circuit Boards(PCBs) and developing sound
+                                            electrical circuits to interact with sensors and actuators. Being able to design PCBs and circuits to achieve goals dramatically increases the complexity and
+                                            applicability of control systems in the real-world. I have designed a few PCBs, some more complex than others, but what is important is that I have also been taught
+                                            some of the intricacies that need to be considered when designing PCBs to both increase their chance of long term success and also their ability to change in the
+                                            future.
+                                        </li>
+
+                                        <li>
+                                            <p><span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> Word Processing - As a side project for me, in my final year I decided to become proficient with
+                                            <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> and add a new avenue that I could use for presentation in documents. Its been fairly fun, and while its
+                                            unnecessary it has given me another opportunity to learn a unique language and take more pride in my work and reports.</p>
+                                        </li>
+                                        <li>
+                                            Microsoft Office (6+ years Approx.) - Although seemingly unimportant, experience which is sometimes overlooked is word processing and presentation in the workplace.
+                                            But having spent over 6 years using various application from Microsoft Office I can comfortably assume I am proficient at using them and, more importantly, proficient
+                                            at finding a solution to any problem I may have when using them.
+
+                                        </li>
+
+
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="box4" id="attribute_container">
+                        <div class="box-row" id="attribute_head">
+                            <h5 style="padding-left:10px">Attributes<a style="color:white" aria-expanded="false" id="TLink4" href="#!" onclick="expandContract('attri_expand_container', 'TLink4')"> <img class="expand-arrow" style="vertical-align: sub" src="nc_assets/img/icons/icons8-expand-arrow-24.png" alt=""></a></h5>
+                        </div>
+
+                        <div class="collapsed" id="attri_expand_container">
+                            <div class="box-row" id="attributes_main">
+
+                                <div class="box-cell" id="attri_list_1">
+                                    <ul>
+                                        <li>Hard working</li>
+                                        <li>Diligent</li>
+                                        <li>Adaptable</li>
+                                        <li>Managing & Organising</li>
+
+                                    </ul>
+                                </div>
+                                <div class="box-cell" id="attri_list_2">
+                                    <ul>
+                                        <li>Enthusiastic</li>
+                                        <li>Creative</li>
+                                        <li>Critical Thinking</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="box4" id="hob_int_container">
+                        <div class="box-row" id="hob_int_head">
+                            <h5 style="padding-left:10px">Hobbies & Interests<a style="color:white" aria-expanded="false" id="TLink5" href="#!" onclick="expandContract('hob_int_expand_container', 'TLink5')"> <img class="expand-arrow" style="vertical-align: sub" src="nc_assets/img/icons/icons8-expand-arrow-24.png" alt=""></a></h5>
+                        </div>
+
+                        <div class="collapsed" id="hob_int_expand_container">
+                            <div class="box-row" id="hob_int_main">
+
+                                <div class="box-cell" id="hob_int_list_1">
+                                    <ul>
+                                        <li>Hiking</li>
+                                        <li>Video Games</li>
+                                        <li>Reading</li>
+                                        <li>Rubik's Cube</li>
+
+                                    </ul>
+                                </div>
+                                <div class="box-cell" id="hob_int_list_2">
+                                    <ul>
+                                        <li>Volunteering</li>
+                                        <li>Drawing</li>
+                                        <li>Digital Design</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="box" id="footer">
+                <div class="box-row">
+                    <div  class="box-cell box1" id="contact_me" >
+                        <h3>Contact Me</h3>
+
+
+                    </div>
+
+                    <div class="box-cell box2" id="details" style="width: 400px">
+
+                        <ul>
+                            <li class="fa fa-envelope" style="font-size:24px; color: orange; padding: 0px 20px 0px 20px">
+                                <a style="color:white; font-size: 15px; font-family: 'Work Sans', sans-serif" href="mailto:nicholask.12210@gmail.com"> nicholask.12210@gmail.com</a>
+                            </li>
+
+                            <li class="fa fa-phone" style="font-size:24px; color: orange; padding: 0px 20px 0px 20px">
+                                <a style="color:white; font-size: 15px; font-family: 'Work Sans', sans-serif; line-height: 23px" href="tel:(+64)021-145-7773">(+64) 021-145-7773</a>
+                            </li>
+
+                            <li class="fa fa-linkedin-square" style="font-size:24px; color: orange; padding: 0px 20px 0px 23px">
+                                <a style=" color:white; font-size: 15px; font-family: 'Work Sans', sans-serif; line-height: 23px" href="https://www.linkedin.com/in/nicholas-krause-656526151/"> LinkedIn</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="box-row" id="copyright">
+                    <div class="box-cell box2">
+                        <small>&copy; 2020, Nicholas Krause</small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

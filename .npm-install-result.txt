@@ -1,0 +1,16 @@
+code=0
+stdout:
+
+added 11 packages, and audited 965 packages in 3s
+
+187 packages are looking for funding
+  run `npm fund` for details
+
+22 vulnerabilities (2 low, 9 moderate, 11 high)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+stderr:
