@@ -1,0 +1,21 @@
+class Base:
+    BASE_VEL = 15
+    WIDTH = 2400
+
+    def __init__(self, y):
+        self.y = y
+        self.left = 0
+        self.right = self.WIDTH
+        self.vel = self.BASE_VEL
+
+    def move(self):
+        self.left -= self.vel
+        self.right -= self.vel
+
+        if self.left + self.WIDTH < 0:
+            self.left = self.right + self.WIDTH
+        if self.right + self.WIDTH < 0:
+            self.right = self.left + self.WIDTH
+
+    def accelerate(self, multiplier):
+        self.vel = self.BASE_VEL * multiplier

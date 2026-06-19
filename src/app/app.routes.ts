@@ -17,6 +17,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/legacy/legacy.component').then((m) => m.LegacyComponent),
   },
   {
+    path: 'genetic-algorithm',
+    loadComponent: () =>
+      import('./pages/dino-neat/dino-neat.component').then((m) => m.DinoNeatComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
