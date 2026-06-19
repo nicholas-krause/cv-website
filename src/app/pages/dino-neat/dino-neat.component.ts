@@ -94,11 +94,28 @@ export class DinoNeatComponent {
   @ViewChild('canvas', { static: true }) private readonly canvasRef!: ElementRef<HTMLCanvasElement>;
   readonly service = inject(DinoSimService);
   private readonly destroyRef = inject(DestroyRef);
+  private wasRunningBeforeHidden = false;
+  private readonly handleVisibilityChange = () => {
+    if (document.hidden) {
+      this.wasRunningBeforeHidden = this.service.running();
+      this.service.stop();
+      return;
+    }
+    if (this.wasRunningBeforeHidden) {
+      this.service.start();
+      this.wasRunningBeforeHidden = false;
+    }
+  };
 
   constructor() {
     this.bootstrap();
     const stopEffect = effect(() => this.draw(this.service.frame()));
-    this.destroyRef.onDestroy(() => stopEffect.destroy());
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
+    this.destroyRef.onDestroy(() => {
+      stopEffect.destroy();
+      document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+      this.service.stop();
+    });
   }
 
   async bootstrap(): Promise<void> {

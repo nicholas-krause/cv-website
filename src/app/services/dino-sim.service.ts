@@ -128,7 +128,14 @@ config = neat.config.Config(
     neat.DefaultStagnation,
     "${this.pyRoot}/configuration_FF.txt"
 )
-params = SimulationParams(max_generations=20, seed=42)
+params = SimulationParams(
+    max_generations=20,
+    start_velocity=9.5,
+    accel_per_second=0.38,
+    max_velocity=21.5,
+    bird_spawn_interval=280,
+    seed=42
+)
 sim = Simulation(config, params)
     `);
   }
