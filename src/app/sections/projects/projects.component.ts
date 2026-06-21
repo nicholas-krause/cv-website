@@ -11,7 +11,7 @@ import { SectionComponent } from '../../ui/section/section.component';
   template: `
     <app-section
       id="projects"
-      kicker="04 / Projects"
+      kicker="05 / University Projects"
       heading="University Projects"
       description="Selected coursework and capstone projects from the University of Canterbury. Click any project for the full write-up."
     >
@@ -73,20 +73,6 @@ import { SectionComponent } from '../../ui/section/section.component';
           </a>
         }
       </div>
-      <a
-        routerLink="/genetic-algorithm"
-        appReveal
-        class="mt-6 block rounded-2xl border border-accent-cyan/40 bg-surface/80 p-6 shadow-lg shadow-black/20 transition hover:-translate-y-1 hover:shadow-accent-cyan/10 light:bg-white"
-      >
-        <p class="font-mono text-xs tracking-widest text-accent-cyan uppercase">Interactive Demo</p>
-        <h3 class="mt-2 text-xl font-semibold">Dino NEAT Genetic Algorithm</h3>
-        <p class="mt-2 text-sm text-muted">
-          Run the Python simulation directly in-browser and watch generations evolve in real time.
-        </p>
-        <span class="mt-4 inline-flex items-center gap-1 font-mono text-xs text-accent-cyan">
-          Open showcase
-        </span>
-      </a>
     </app-section>
   `,
 })

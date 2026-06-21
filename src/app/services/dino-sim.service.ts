@@ -1,6 +1,41 @@
 import { Injectable, signal } from '@angular/core';
 
-type DinoFrameState = {
+export type DinoCactusSize = 'small' | 'large';
+
+export type DinoCactusState = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  size: DinoCactusSize;
+  variant: number;
+};
+
+export type DinoState = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  jumping: boolean;
+  ducking: boolean;
+};
+
+export type DinoBirdState = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+export type DinoHistoryEntry = {
+  generation: number;
+  best_fitness: number;
+  avg_fitness: number;
+  species_count?: number;
+  score?: number;
+};
+
+export type DinoFrameState = {
   generation: number;
   alive: number;
   score: number;
@@ -8,10 +43,11 @@ type DinoFrameState = {
   nearest_cactus_index: number | null;
   nearest_bird_index: number | null;
   base: { left: number; right: number; y: number };
-  dinos: Array<{ x: number; y: number; width: number; height: number }>;
-  cacti: Array<{ x: number; y: number; width: number; height: number }>;
-  birds: Array<{ x: number; y: number; width: number; height: number }>;
-  history: Array<{ generation: number; best_fitness: number; avg_fitness: number }>;
+  dinos: DinoState[];
+  cacti: DinoCactusState[];
+  birds: DinoBirdState[];
+  latest_history: DinoHistoryEntry | null;
+  history: DinoHistoryEntry[];
 };
 
 type PyodideApi = {

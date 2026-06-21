@@ -47,6 +47,10 @@ import { ButtonComponent } from '../../ui/button/button.component';
             <div
               class="absolute h-[20rem] w-[20rem] rounded-full bg-gradient-to-br from-accent-cyan/25 to-accent-blue/25 blur-3xl sm:h-[32rem] sm:w-[32rem]"
             ></div>
+            <div
+              class="hero-disc absolute h-[22rem] w-[22rem] rounded-full sm:h-[34rem] sm:w-[34rem]"
+              aria-hidden="true"
+            ></div>
             <img
               src="assets/img/hero-circuit.png"
               alt=""
@@ -67,6 +71,18 @@ import { ButtonComponent } from '../../ui/button/button.component';
     `
       .hero-emblem {
         animation: hero-pulse 6s ease-in-out infinite;
+      }
+
+      .hero-disc {
+        background: radial-gradient(closest-side, var(--color-base) 55%, transparent 100%);
+      }
+
+      :host-context(.light) .hero-disc {
+        background: radial-gradient(
+          closest-side,
+          var(--color-surface-light) 55%,
+          transparent 100%
+        );
       }
 
       @keyframes hero-pulse {

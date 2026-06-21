@@ -8,7 +8,7 @@ import { SectionComponent } from '../../ui/section/section.component';
   standalone: true,
   imports: [SectionComponent, RevealDirective],
   template: `
-    <app-section id="contact" kicker="05 / Contact" heading="Get in touch">
+    <app-section id="contact" kicker="06 / Contact" heading="Get in touch">
       <div appReveal class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         @for (link of content.contactLinks; track link.label) {
           <a

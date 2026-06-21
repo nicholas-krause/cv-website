@@ -259,6 +259,7 @@ export const NAV_SECTIONS = [
   { id: 'about', label: 'About' },
   { id: 'resume', label: 'Resume' },
   { id: 'interests', label: 'Interests' },
+  { id: 'recent', label: 'Recent' },
   { id: 'projects', label: 'Projects' },
   { id: 'contact', label: 'Contact' },
 ] as const;
