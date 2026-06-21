@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-section',
   standalone: true,
   template: `
-    <section [id]="id" class="py-16 md:py-24">
+    <section [id]="id" class="py-10 md:py-14">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <p class="font-mono text-sm tracking-widest text-accent-cyan uppercase">{{ kicker }}</p>
         <h2 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">{{ heading }}</h2>

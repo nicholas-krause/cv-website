@@ -30,7 +30,8 @@ class Dinosaur:
         )
 
         if self.is_ducking:
-            elevation_change = 30
+            # Airborne duck = fast-fall (dive); grounded duck stays clamped at GROUND.
+            elevation_change = 60 if self.y < GROUND else 30
         elif elevation_change >= 25:
             elevation_change = 25
         new_y = self.y + elevation_change

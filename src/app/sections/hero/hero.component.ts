@@ -8,7 +8,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
   standalone: true,
   imports: [ButtonComponent, RevealDirective],
   template: `
-    <section id="hero" class="relative overflow-hidden py-16 md:py-24">
+    <section id="hero" class="relative overflow-hidden py-12 md:py-16">
       <div class="pcb-bg absolute inset-0 opacity-30"></div>
       <div
         class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8"

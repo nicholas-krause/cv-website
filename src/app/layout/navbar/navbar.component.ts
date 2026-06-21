@@ -27,7 +27,8 @@ import { ThemeService } from '../../services/theme.service';
         <div class="hidden items-center gap-6 md:flex">
           @for (section of sections; track section.id) {
             <a
-              [href]="'#' + section.id"
+              [routerLink]="['/']"
+              [fragment]="section.id"
               class="text-sm text-muted transition hover:text-accent-cyan"
             >
               {{ section.label }}
@@ -118,7 +119,8 @@ import { ThemeService } from '../../services/theme.service';
           <div class="flex flex-col gap-3">
             @for (section of sections; track section.id) {
               <a
-                [href]="'#' + section.id"
+                [routerLink]="['/']"
+                [fragment]="section.id"
                 class="rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-surface hover:text-accent-cyan"
                 (click)="menuOpen.set(false)"
               >

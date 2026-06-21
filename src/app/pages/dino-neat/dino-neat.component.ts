@@ -9,6 +9,8 @@ import {
   DinoState,
 } from '../../services/dino-sim.service';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { DinoControlsComponent } from './dino-controls.component';
+import { DinoLiveControlsComponent } from './dino-live-controls.component';
 
 type SpriteKey =
   | 'dinoRun01'
@@ -71,10 +73,28 @@ const DINO_GROUND_Y = 365;
 // baseline (ground near the bottom of the 400px canvas, birds fully in frame).
 const RENDER_Y_OFFSET = 0;
 
+// HUD styling (Google/Chrome-dino style: pixelly mono text in top-right).
+const HUD_FONT = '600 28px "JetBrains Mono", "Courier New", monospace';
+const HUD_SUB_FONT = '600 16px "JetBrains Mono", "Courier New", monospace';
+const HUD_COLOR = '#535353';
+const HUD_PADDING_X = 28;
+const HUD_PADDING_Y = 36;
+
+// Vision-line render colors. Pulled from the Tailwind theme accents so dark/light
+// readability stays consistent with the rest of the page.
+const VISION_LINE_CACTUS_COLOR = 'rgba(34, 211, 238, 0.85)';
+const VISION_LINE_BIRD_COLOR = 'rgba(245, 158, 11, 0.85)';
+
 @Component({
   selector: 'app-dino-neat',
   standalone: true,
-  imports: [RouterLink, ButtonComponent, DecimalPipe],
+  imports: [
+    RouterLink,
+    ButtonComponent,
+    DecimalPipe,
+    DinoControlsComponent,
+    DinoLiveControlsComponent,
+  ],
   template: `
     <main class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
       <a
@@ -85,33 +105,18 @@ const RENDER_Y_OFFSET = 0;
         Back to Projects
       </a>
 
-      <div class="mt-6 flex flex-wrap items-start justify-between gap-6">
-        <div>
-          <p class="font-mono text-sm text-accent-cyan uppercase">Genetic Algorithm Showcase</p>
-          <h1 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Dino NEAT (Pyodide)</h1>
-          <p class="mt-3 max-w-2xl text-muted">
-            This runs the Python NEAT simulation in-browser and renders frame data on a canvas.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          <app-button
-            variant="secondary"
-            [buttonType]="'button'"
-            (clicked)="service.restart()"
-            [fullWidth]="false"
-          >
-            Restart
-          </app-button>
-          <app-button
-            variant="primary"
-            [buttonType]="'button'"
-            (clicked)="toggleRun()"
-            [fullWidth]="false"
-          >
-            {{ service.running() ? 'Pause' : 'Run' }}
-          </app-button>
-        </div>
+      <div class="mt-6">
+        <p class="font-mono text-sm text-accent-cyan uppercase">Genetic Algorithm Showcase</p>
+        <h1 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Dino NEAT (Pyodide)</h1>
+        <p class="mt-3 max-w-2xl text-muted">
+          This runs the Python NEAT simulation in-browser and renders frame data on a canvas.
+          <a
+            href="#details"
+            (click)="scrollToSection($event, details)"
+            class="font-mono text-sm text-accent-cyan transition hover:underline"
+            >More details below</a
+          >.
+        </p>
       </div>
 
       @if (service.error(); as err) {
@@ -122,7 +127,7 @@ const RENDER_Y_OFFSET = 0;
         </div>
       }
 
-      <section class="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
+      <section class="mt-6 flex flex-col gap-6">
         <div
           class="overflow-hidden rounded-2xl border border-border bg-surface/60 p-3 light:border-border-light light:bg-white"
         >
@@ -132,57 +137,186 @@ const RENDER_Y_OFFSET = 0;
             height="400"
             class="h-auto w-full rounded-xl bg-[#f7f7f7]"
           ></canvas>
+          <div
+            class="mt-3 flex flex-wrap items-center justify-end gap-2 border-t border-border/60 pt-3 light:border-border-light"
+          >
+            <app-button
+              variant="secondary"
+              [buttonType]="'button'"
+              (clicked)="service.restart()"
+              [fullWidth]="false"
+            >
+              Restart
+            </app-button>
+            <app-button
+              variant="primary"
+              [buttonType]="'button'"
+              (clicked)="toggleRun()"
+              [fullWidth]="false"
+            >
+              {{ service.running() ? 'Pause' : 'Run' }}
+            </app-button>
+          </div>
         </div>
 
-        <aside
-          class="rounded-2xl border border-border bg-surface/60 p-5 light:border-border-light light:bg-white"
-        >
-          <h2 class="text-lg font-semibold">Live Stats</h2>
-          @if (service.loading()) {
-            <p class="mt-3 text-sm text-muted">Loading Pyodide + neat-python...</p>
-          } @else {
-            @if (service.frame(); as frame) {
-              <dl class="mt-4 grid grid-cols-2 gap-3 text-sm">
-                <div class="rounded-lg border border-border p-3 light:border-border-light">
-                  <dt class="font-mono text-xs text-muted uppercase">Generation</dt>
-                  <dd class="mt-1 text-xl font-bold">{{ frame.generation }}</dd>
-                </div>
-                <div class="rounded-lg border border-border p-3 light:border-border-light">
-                  <dt class="font-mono text-xs text-muted uppercase">Alive</dt>
-                  <dd class="mt-1 text-xl font-bold">{{ frame.alive }}</dd>
-                </div>
-                <div class="rounded-lg border border-border p-3 light:border-border-light">
-                  <dt class="font-mono text-xs text-muted uppercase">Score</dt>
-                  <dd class="mt-1 text-xl font-bold">{{ frame.score }}</dd>
-                </div>
-                <div class="rounded-lg border border-border p-3 light:border-border-light">
-                  <dt class="font-mono text-xs text-muted uppercase">Status</dt>
-                  <dd class="mt-1 text-xl font-bold">
-                    {{ frame.done ? 'Done' : 'Running' }}
-                  </dd>
-                </div>
-              </dl>
-              @if (frame.latest_history; as h) {
-                <dl class="mt-4 grid grid-cols-2 gap-3 text-xs">
-                  <div class="rounded-lg border border-border p-3 light:border-border-light">
-                    <dt class="font-mono text-[10px] text-muted uppercase">Best Fitness</dt>
-                    <dd class="mt-1 font-mono text-base font-semibold">
-                      {{ h.best_fitness | number: '1.0-2' }}
-                    </dd>
-                  </div>
-                  <div class="rounded-lg border border-border p-3 light:border-border-light">
-                    <dt class="font-mono text-[10px] text-muted uppercase">Avg Fitness</dt>
-                    <dd class="mt-1 font-mono text-base font-semibold">
-                      {{ h.avg_fitness | number: '1.0-2' }}
-                    </dd>
-                  </div>
-                </dl>
+        <div class="grid gap-6 lg:grid-cols-[2fr_1fr]">
+          <app-dino-controls />
+
+          <div class="flex flex-col gap-6">
+            <app-dino-live-controls />
+
+            <aside
+              class="rounded-2xl border border-border bg-surface/60 p-5 light:border-border-light light:bg-white"
+            >
+              <h2 class="text-lg font-semibold">Live Stats</h2>
+              @if (service.loading()) {
+                <p class="mt-3 text-sm text-muted">Loading Pyodide + neat-python...</p>
+              } @else {
+                @if (service.frame(); as frame) {
+                  <dl class="mt-4 grid grid-cols-2 gap-3 text-sm">
+                    <div class="rounded-lg border border-border p-3 light:border-border-light">
+                      <dt class="font-mono text-xs text-muted uppercase">Generation</dt>
+                      <dd class="mt-1 text-xl font-bold">{{ frame.generation }}</dd>
+                    </div>
+                    <div class="rounded-lg border border-border p-3 light:border-border-light">
+                      <dt class="font-mono text-xs text-muted uppercase">Alive</dt>
+                      <dd class="mt-1 text-xl font-bold">{{ frame.alive }}</dd>
+                    </div>
+                    <div class="rounded-lg border border-border p-3 light:border-border-light">
+                      <dt class="font-mono text-xs text-muted uppercase">Status</dt>
+                      <dd class="mt-1 text-xl font-bold">
+                        {{ frame.done ? 'Done' : 'Running' }}
+                      </dd>
+                    </div>
+                  </dl>
+                  <dl class="mt-4 grid grid-cols-2 gap-3 text-sm">
+                    <div class="rounded-lg border border-border p-3 light:border-border-light">
+                      <dt class="font-mono text-xs text-muted uppercase">
+                        Best Fitness (Last Gen)
+                      </dt>
+                      <dd class="mt-1 text-xl font-bold">
+                        {{
+                          frame.latest_history
+                            ? (frame.latest_history.best_fitness | number: '1.0-2')
+                            : '—'
+                        }}
+                      </dd>
+                    </div>
+                    <div class="rounded-lg border border-border p-3 light:border-border-light">
+                      <dt class="font-mono text-xs text-muted uppercase">
+                        Average Fitness (Last Gen)
+                      </dt>
+                      <dd class="mt-1 text-xl font-bold">
+                        {{
+                          frame.latest_history
+                            ? (frame.latest_history.avg_fitness | number: '1.0-2')
+                            : '—'
+                        }}
+                      </dd>
+                    </div>
+                  </dl>
+                  <p class="mt-2 text-[11px] text-muted">Updates when a generation finishes.</p>
+                } @else {
+                  <p class="mt-3 text-sm text-muted">Initializing simulation...</p>
+                }
               }
-            } @else {
-              <p class="mt-3 text-sm text-muted">Initializing simulation...</p>
-            }
-          }
-        </aside>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section
+        #details
+        id="details"
+        class="mt-12 scroll-mt-24 rounded-2xl border border-border bg-surface/60 p-6 light:border-border-light light:bg-white sm:p-8"
+      >
+        <p class="font-mono text-xs tracking-widest text-accent-cyan uppercase">About this demo</p>
+        <h2 class="mt-2 text-2xl font-bold tracking-tight">How NEAT learns to play</h2>
+        <div class="mt-4 max-w-3xl space-y-3 text-sm leading-relaxed text-muted">
+          <p>
+            This page runs the entire training loop in your browser. CPython (compiled to
+            WebAssembly) is loaded via Pyodide, then the same Python NEAT implementation that
+            normally runs on the desktop is driven one frame at a time by the page's render
+            loop.
+          </p>
+          <p>
+            NEAT (NeuroEvolution of Augmenting Topologies) evolves both the
+            <em>weights</em> and the <em>structure</em> of a neural network. Every dino is
+            controlled by its own tiny network whose three outputs choose between jump, stand,
+            and duck. Dinos that survive longer earn higher fitness; the next generation is
+            bred from the best of them.
+          </p>
+        </div>
+
+        <h3 class="mt-8 text-lg font-semibold">Controls explained</h3>
+        <dl
+          class="mt-4 grid gap-x-8 gap-y-5 text-sm leading-relaxed md:grid-cols-2"
+        >
+          <div>
+            <dt class="font-mono text-xs tracking-wider text-accent-cyan uppercase">
+              Population size
+            </dt>
+            <dd class="mt-1 text-muted">
+              How many dinos run in parallel each generation. Larger populations explore
+              more variations at once, but every frame has to step them all forward.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs tracking-wider text-accent-cyan uppercase">
+              Weight mutation rate
+            </dt>
+            <dd class="mt-1 text-muted">
+              Probability that each connection weight is perturbed when a child is bred.
+              Higher = more exploration; lower = the population sticks closer to whatever
+              already works.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs tracking-wider text-accent-cyan uppercase">
+              Add-connection probability
+            </dt>
+            <dd class="mt-1 text-muted">
+              Probability of adding a brand-new connection between existing nodes during
+              mutation. This is what drives topology growth - the core idea that makes NEAT
+              different from fixed-shape neural-net training.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs tracking-wider text-accent-cyan uppercase">
+              Speciation threshold
+            </dt>
+            <dd class="mt-1 text-muted">
+              Genome-distance cutoff for grouping individuals into species. Lower values
+              mean more, smaller species (innovations get more protection); higher values
+              collapse everyone into a few large groups.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs tracking-wider text-accent-cyan uppercase">Elitism</dt>
+            <dd class="mt-1 text-muted">
+              How many of each species' top genomes carry over to the next generation
+              unchanged. Higher values preserve good solutions but slow exploration.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs tracking-wider text-accent-cyan uppercase">
+              Random seed
+            </dt>
+            <dd class="mt-1 text-muted">
+              Seeds Python's random module before the run starts so the same seed produces
+              the same evolution. Hit "New seed" to roll a fresh one.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs tracking-wider text-accent-cyan uppercase">
+              Birds enabled
+            </dt>
+            <dd class="mt-1 text-muted">
+              Toggles flying obstacles. With birds off, the population only needs to learn
+              jumping; with birds on, it also has to learn when to duck.
+            </dd>
+          </div>
+        </dl>
       </section>
     </main>
   `,
@@ -210,7 +344,12 @@ export class DinoNeatComponent {
   constructor() {
     this.preloadSprites();
     this.bootstrap();
-    const stopEffect = effect(() => this.draw(this.service.frame()));
+    const stopEffect = effect(() => {
+      // Read visionLinesEnabled too so toggling it repaints immediately,
+      // even when the simulation is paused.
+      this.service.visionLinesEnabled();
+      this.draw(this.service.frame());
+    });
     document.addEventListener('visibilitychange', this.handleVisibilityChange);
     this.destroyRef.onDestroy(() => {
       stopEffect.destroy();
@@ -230,6 +369,13 @@ export class DinoNeatComponent {
     } else {
       this.service.start();
     }
+  }
+
+  scrollToSection(event: Event, target: HTMLElement): void {
+    // Bypass the global <base href="/">, which would otherwise resolve
+    // a bare `#details` href to `/#details` (root, wrong page).
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   private preloadSprites(): void {
@@ -281,6 +427,65 @@ export class DinoNeatComponent {
     for (const dino of frame.dinos) {
       this.drawDino(ctx, dino);
     }
+
+    if (this.service.visionLinesEnabled()) {
+      this.drawVisionLines(ctx, frame);
+    }
+
+    this.drawHud(ctx, canvas, frame);
+  }
+
+  private drawHud(
+    ctx: CanvasRenderingContext2D,
+    canvas: HTMLCanvasElement,
+    frame: DinoFrameState,
+  ): void {
+    const score = String(frame.score).padStart(5, '0');
+    const sub = `GEN ${frame.generation}  ALIVE ${frame.alive}`;
+
+    ctx.save();
+    ctx.imageSmoothingEnabled = false;
+    ctx.fillStyle = HUD_COLOR;
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'right';
+
+    ctx.font = HUD_FONT;
+    ctx.fillText(score, canvas.width - HUD_PADDING_X, HUD_PADDING_Y);
+
+    ctx.font = HUD_SUB_FONT;
+    ctx.fillText(sub, canvas.width - HUD_PADDING_X, HUD_PADDING_Y + 36);
+    ctx.restore();
+  }
+
+  private drawVisionLines(ctx: CanvasRenderingContext2D, frame: DinoFrameState): void {
+    const lead = frame.dinos[0];
+    if (!lead) return;
+    const originX = Math.round(lead.x + lead.width / 2);
+    const originY = Math.round(lead.y - RENDER_Y_OFFSET - lead.height / 2);
+
+    ctx.save();
+    ctx.lineWidth = 2;
+
+    const cactusIdx = frame.nearest_cactus_index;
+    if (cactusIdx !== null && cactusIdx !== undefined && frame.cacti[cactusIdx]) {
+      const c = frame.cacti[cactusIdx];
+      ctx.strokeStyle = VISION_LINE_CACTUS_COLOR;
+      ctx.beginPath();
+      ctx.moveTo(originX, originY);
+      ctx.lineTo(Math.round(c.x + c.width / 2), Math.round(c.y - RENDER_Y_OFFSET - c.height / 2));
+      ctx.stroke();
+    }
+
+    const birdIdx = frame.nearest_bird_index;
+    if (birdIdx !== null && birdIdx !== undefined && frame.birds[birdIdx]) {
+      const b = frame.birds[birdIdx];
+      ctx.strokeStyle = VISION_LINE_BIRD_COLOR;
+      ctx.beginPath();
+      ctx.moveTo(originX, originY);
+      ctx.lineTo(Math.round(b.x + b.width / 2), Math.round(b.y - RENDER_Y_OFFSET - b.height / 2));
+      ctx.stroke();
+    }
+    ctx.restore();
   }
 
   private drawGround(
