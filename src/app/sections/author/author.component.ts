@@ -58,7 +58,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
               class="author-emblem relative w-[24rem] max-w-full select-none sm:w-[38rem]"
             />
             <img
-              src="assets/img/headshot.jpg"
+              src="assets/img/headshot.jpg?v=1"
               [alt]="content.name"
               class="pointer-events-none absolute h-40 w-40 select-none rounded-full border-2 border-accent-cyan/40 object-cover shadow-xl shadow-accent-cyan/20 sm:h-52 sm:w-52"
             />
