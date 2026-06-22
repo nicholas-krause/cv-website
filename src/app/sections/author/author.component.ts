@@ -4,12 +4,12 @@ import { RevealDirective } from '../../directives/reveal.directive';
 import { ButtonComponent } from '../../ui/button/button.component';
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-author',
   standalone: true,
   imports: [ButtonComponent, RevealDirective],
   template: `
-    <section id="hero" class="relative overflow-hidden py-12 md:py-16">
-      <div class="pcb-bg hero-pcb-fade absolute inset-0 opacity-30"></div>
+    <section id="author" class="relative overflow-hidden py-12 md:py-16">
+      <div class="pcb-bg author-pcb-fade absolute inset-0 opacity-30"></div>
       <div
         class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8"
       >
@@ -48,14 +48,14 @@ import { ButtonComponent } from '../../ui/button/button.component';
               class="absolute h-[20rem] w-[20rem] rounded-full bg-gradient-to-br from-accent-cyan/25 to-accent-blue/25 blur-3xl sm:h-[32rem] sm:w-[32rem]"
             ></div>
             <div
-              class="hero-disc absolute h-[22rem] w-[22rem] rounded-full sm:h-[34rem] sm:w-[34rem]"
+              class="author-disc absolute h-[22rem] w-[22rem] rounded-full sm:h-[34rem] sm:w-[34rem]"
               aria-hidden="true"
             ></div>
             <img
-              src="assets/img/hero-circuit.png"
+              src="assets/img/author-circuit.png"
               alt=""
               aria-hidden="true"
-              class="hero-emblem relative w-[24rem] max-w-full select-none sm:w-[38rem]"
+              class="author-emblem relative w-[24rem] max-w-full select-none sm:w-[38rem]"
             />
             <img
               src="assets/img/headshot.jpg"
@@ -69,22 +69,22 @@ import { ButtonComponent } from '../../ui/button/button.component';
   `,
   styles: [
     `
-      .hero-emblem {
-        animation: hero-pulse 6s ease-in-out infinite;
+      .author-emblem {
+        animation: author-pulse 6s ease-in-out infinite;
       }
 
-      /* Fade the PCB-grid overlay out near the bottom of the hero so the */
+      /* Fade the PCB-grid overlay out near the bottom of the section so the */
       /* transition into the next section is seamless instead of a hard seam. */
-      .hero-pcb-fade {
+      .author-pcb-fade {
         -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
         mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
       }
 
-      .hero-disc {
+      .author-disc {
         background: radial-gradient(closest-side, var(--color-base) 55%, transparent 100%);
       }
 
-      :host-context(.light) .hero-disc {
+      :host-context(.light) .author-disc {
         background: radial-gradient(
           closest-side,
           var(--color-surface-light) 55%,
@@ -92,7 +92,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
         );
       }
 
-      @keyframes hero-pulse {
+      @keyframes author-pulse {
         0%,
         100% {
           filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.25));
@@ -103,13 +103,13 @@ import { ButtonComponent } from '../../ui/button/button.component';
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .hero-emblem {
+        .author-emblem {
           animation: none;
         }
       }
     `,
   ],
 })
-export class HeroComponent {
+export class AuthorComponent {
   readonly content = SITE_CONTENT;
 }
