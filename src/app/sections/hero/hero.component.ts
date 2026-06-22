@@ -9,7 +9,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
   imports: [ButtonComponent, RevealDirective],
   template: `
     <section id="hero" class="relative overflow-hidden py-12 md:py-16">
-      <div class="pcb-bg absolute inset-0 opacity-30"></div>
+      <div class="pcb-bg hero-pcb-fade absolute inset-0 opacity-30"></div>
       <div
         class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8"
       >
@@ -71,6 +71,13 @@ import { ButtonComponent } from '../../ui/button/button.component';
     `
       .hero-emblem {
         animation: hero-pulse 6s ease-in-out infinite;
+      }
+
+      /* Fade the PCB-grid overlay out near the bottom of the hero so the */
+      /* transition into the next section is seamless instead of a hard seam. */
+      .hero-pcb-fade {
+        -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
       }
 
       .hero-disc {
